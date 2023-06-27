@@ -1,7 +1,10 @@
 
-step 1:
+#Step 1:
+
  Run npm install
-step 2:  Note: before executing this make sure mock api app is up and running
+ 
+#Step 2:  Note: before executing this make sure mock api app is up and running
+
  Run npm start
  
  
