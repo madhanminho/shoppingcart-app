@@ -1,3 +1,13 @@
+
+#Step 1:
+
+ Run npm install
+ 
+#Step 2:  Note: before executing this make sure mock api app is up and running
+
+ Run npm start
+ 
+ 
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
