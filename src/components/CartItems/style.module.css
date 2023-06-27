@@ -1,0 +1,113 @@
+.items {
+	margin: 0;
+	padding: 0;
+}
+.items li {
+	display: grid;
+	background-color: white;
+	grid-template-columns: 10% 45% 20% 13% 8%;
+	align-items: center;
+	margin: 3px;
+	padding: 20px;
+	border: 1px solid green;
+	border-radius: 2px;
+	grid-gap: 9px;
+}
+@media screen and (max-width: 900px) {
+	.items li {
+		grid-template-columns: 10% 34% 24% 17% 10%;
+   }
+}
+@media screen and (max-width: 700px) {
+	.items li {
+		grid-template-columns: 10% 33% 29% 14% 7%;
+   }
+}
+@media screen and (max-width: 500px) {
+	.items li {
+		grid-template-columns: 18% 22% 24% 19% 7%;
+   }
+}
+.buttons {
+	display: grid;
+	grid-template-columns: 30% 40% 30%;
+	width: 136px;
+	align-items: center;
+}
+@media screen and (max-width: 600px) {
+	.buttons {
+		width: 81px;
+   }
+}
+@media screen and (max-width: 500px) {
+	.buttons {
+		width: 73px;
+   }
+}
+.buttons p {
+	margin: 0;
+	text-align: center;
+}
+
+.cartItemWrapper{
+	width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 1.2rem;
+    display: grid;
+    grid-template-columns: 100px 1fr 80px 40px;
+}
+.cartItemImageWrapper{
+	width: 90px;
+    height: 90px;
+    margin-right: 1.6rem;
+    position: relative;
+}
+.cartItemImage{
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.cartItemDetails {
+    flex-grow: 1;
+}
+.cartItemSpecs {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+}
+.specTitle{
+	color: #8d8d8d;
+    font-size: 12px;
+    display: block;
+    margin-bottom: 5px;
+}
+.my-0 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.cartItemPrice {
+    margin-right: 2rem;
+}
+.cartItemRemove {
+    align-self: center;
+}
+.cartItemControl {
+    width: 30px;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.5rem;
+}
+.cartItem{
+	display: flex;
+    align-items: center;
+    border: 1px solid #e1e1e1;
+    margin-bottom: 1.2rem;
+    -webkit-transition: all .5s cubic-bezier(.77,0,.175,1);
+    -moz-transition: all .5s cubic-bezier(.77,0,.175,1);
+    -o-transition: all .5s cubic-bezier(.77,0,.175,1);
+    -ms-transition: all .5s cubic-bezier(.77,0,.175,1);
+    transition: all .5s cubic-bezier(.77,0,.175,1);
+    animation: slide-up .5s ease;
+}

@@ -1,0 +1,88 @@
+.summary {
+	display: inherit;
+	background-color: white;
+	align-content: flex-start;
+	margin: 3px;
+	padding: 20px;
+	border: 1px solid green;
+	border-radius: 2px;
+	font-size: 14px;
+}
+.cartCheckout{
+   /*  background: #fff;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%; */
+
+	background: #fff;
+	padding: 1.6rem 1.6rem 100px;
+	display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.cartTotal{
+
+}
+.cartTotalTitle {
+    font-size: 1.2rem;
+    margin: 0;
+}
+.cartTotalAmount {
+    margin: 1.2rem 0;
+}
+.cartCheckoutButton {
+    font-size: 0.6rem;
+    padding: 1.6rem 3.2rem;
+    text-transform: uppercase;
+	background: #101010;
+    padding: 1.6rem;
+    border: 1px solid #101010;
+    color: #fff;
+    font-weight: 700;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    transition: all .3s ease;
+
+}
+.cartItem{
+	display: flex;
+    align-items: center;
+    border: 1px solid #e1e1e1;
+    margin-bottom: 1.2rem;
+    -webkit-transition: all .5s cubic-bezier(.77,0,.175,1);
+    -moz-transition: all .5s cubic-bezier(.77,0,.175,1);
+    -o-transition: all .5s cubic-bezier(.77,0,.175,1);
+    -ms-transition: all .5s cubic-bezier(.77,0,.175,1);
+    transition: all .5s cubic-bezier(.77,0,.175,1);
+    animation: slide-up .5s ease;
+}
+.cartItemControl{
+	width: 30px;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.5rem;
+}
+.cartControl{
+	width: 35px;
+    height: 100%;
+    padding: 5px;
+    font-weight: 700;
+}
+.dflexCenter{
+	padding: 20px;
+	justify-content: center;
+}

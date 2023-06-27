@@ -1,0 +1,13 @@
+@media screen and (max-width: 1100px) {
+	.wrapper {
+		display: grid;
+   }
+}
+.wrapper label {
+	font-size: 12px;
+	font-weight: bold;
+	margin: 7px 0;
+}
+.wrapper input {
+	margin: 7px 0;
+}
