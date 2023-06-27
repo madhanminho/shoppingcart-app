@@ -1,12 +1,18 @@
 
 #Step 1:
 
- Run npm install
+ Run: npm install
  
 #Step 2:  Note: before executing this make sure mock api app is up and running
 
- Run npm start
- 
+ Run: npm start
+
+ open this url : http://localhost:3000/
+
+ Credentials for checkout signin page : 
+
+ user: test@gmail.com
+ pass: test
  
 # Getting Started with Create React App
 
