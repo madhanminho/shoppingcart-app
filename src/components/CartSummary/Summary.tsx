@@ -11,8 +11,11 @@ import { useDispatch } from 'react-redux';
 import { login } from '../../redux/actions/userAuthAction';
 import { authUserState } from '../../redux/types';
 import { CheckoutSummary } from '../checkout/CheckoutSummary';
+import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 type TypeCartSummary = {
     items: any[],
+    toggleCallback():void,
   }
   
   export type TypeCartSummaryItem = {
@@ -22,8 +25,9 @@ type TypeCartSummary = {
     image: string,
     title: string
   }
-const Summary = ({ items }: TypeCartSummary) => {
+const Summary = ({ items,toggleCallback }: TypeCartSummary) => {
     const dispatch = useDispatch();
+    let navigate = useNavigate(); 
   const [open, setOpen] = React.useState(false);
   const [loginOpen, setLoginOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState("test");
@@ -55,10 +59,7 @@ const [pwd, setPwd] = React.useState('');
     }
 
   }
-  const getCheckoutSummary=():JSX.Element=>{
-    console.log("madhanndddd");
- return <CheckoutSummary items={items}/>;
-  }
+ 
   const handleSubmit = (e:any) => {
     console.log("Form submitted");
     e.preventDefault();
@@ -68,8 +69,10 @@ const [pwd, setPwd] = React.useState('');
         const prof:authUserState={"profile":{"useremail":useremail,"password":pwd},"formSubmitted":true};
         dispatch(login(prof));
         handleLoginClose();
-        getCheckoutSummary();
-     }
+        handleClose();
+        toggleCallback();
+        navigate("/checkout")
+     } 
      else{
         alert("Invalid cred ");
         //handleLoginClose();

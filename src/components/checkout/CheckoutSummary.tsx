@@ -9,24 +9,21 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-type TypeCheckoutSummary = {
-    items: any[],
-  }
-  
-  export type TypeCheckoutSummaryItem = {
-    price: number,
-    quantity: number,
-    id: never,
-    image: string,
-    title: string
-  }
+import { useSelector } from 'react-redux';
+type TypeCart = {
+  cart: [],
+  quantity: number
+}
 
-  export  const CheckoutSummary = ({ items }: TypeCheckoutSummary) => {
+  export  const CheckoutSummary = () => {
+    const itemsCart = useSelector((state: TypeCart) => state.cart);
+    const cartItems:Array<any> = [...itemsCart].reverse();
+    const items:Array<any> =cartItems;
     const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set<number>());
-  const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+  const steps = ['Order Summary', 'Shipping Details', 'Payment Info'];
   const handleClickOpen = () => {
     console.log("handleclick")
     setOpen(true);
@@ -85,10 +82,11 @@ type TypeCheckoutSummary = {
         }
       };
     // Line item amount
-    const sumItem = items.map((item: TypeCheckoutSummaryItem) => item.quantity * item.price);
+    const sumItem = items.map((item: any) => item.quantity * item.price);
     // Total of all items
     const sumTotal = parseFloat((sumItem.reduce((a, b) => a + b, 0)).toFixed(2));
     return (
+      <Box sx={{ width: '100%' }}>
       <div className={style.cartCheckout}>
         <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
@@ -107,10 +105,21 @@ type TypeCheckoutSummary = {
           return (
             <Step key={label} {...stepProps}>
               <StepLabel {...labelProps}>{label}</StepLabel>
+              
+              
             </Step>
           );
         })}
       </Stepper>
+      {activeStep===0 && (<><div className={style.cartTotal}>
+                <p className={style.cartTotalTitle}>Subtotal Amout:</p>
+                <h2 className={style.cartTotalAmount}>
+                  {sumTotal}
+                </h2>
+              </div>
+              </>)}
+      {activeStep===1 &&(<><h3>Shipping Info Here</h3></>)}
+      {activeStep===2 && (<><h3>Payment Info Here</h3></>)}
       {activeStep === steps.length ? (
         <React.Fragment>
           <Typography sx={{ mt: 2, mb: 1 }}>
@@ -145,22 +154,6 @@ type TypeCheckoutSummary = {
           </Box>
         </React.Fragment>
       )}
-            <div className={style.cartTotal}>
-              <p className={style.cartTotalTitle}>Subtotal Amout:</p>
-              <h2 className={style.cartTotalAmount}>
-                {sumTotal}
-              </h2>
-            </div>
-            <Button
-              className={style.cartCheckoutButton}
-             /*  disabled={basket.length === 0 || pathname === '/checkout'} */
-              onClick={()=>onCheckOut()}
-              type="button"
-              variant="contained"
-            >
-              Next Step
-            </Button>
-   
-  
-   </div>)
+            
+   </div></Box>)
   };     

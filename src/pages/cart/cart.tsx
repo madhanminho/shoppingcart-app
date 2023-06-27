@@ -44,7 +44,7 @@ const CartPage = (props:CartInterface) => {
           image={product.image}  title={product.title}/></div>)
         )}
         </div>
-        <Summary items={cartItems}/>
+        <Summary items={cartItems} toggleCallback={props.toggleCallback}/>
     
     </div>
     );
