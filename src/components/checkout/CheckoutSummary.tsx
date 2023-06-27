@@ -10,6 +10,7 @@ import StepLabel from '@mui/material/StepLabel';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { useSelector } from 'react-redux';
+import CartList, { CartListPropsType } from '../CartItems/CartList';
 type TypeCart = {
   cart: [],
   quantity: number
@@ -19,6 +20,8 @@ type TypeCart = {
     const itemsCart = useSelector((state: TypeCart) => state.cart);
     const cartItems:Array<any> = [...itemsCart].reverse();
     const items:Array<any> =cartItems;
+    const itemLength =itemsCart.length>0? itemsCart.map((item: TypeCart) => item.quantity).reduce((a, b) => a + b, 0):0;
+  const isItemsAvail = itemLength !== 0;
     const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const [activeStep, setActiveStep] = React.useState(0);
@@ -28,9 +31,7 @@ type TypeCart = {
     console.log("handleclick")
     setOpen(true);
   };
-  const isStepOptional = (step: number) => {
-    return step === 1;
-  };
+
 
   const isStepSkipped = (step: number) => {
     return skipped.has(step);
@@ -51,36 +52,12 @@ type TypeCart = {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
-      throw new Error("You can't skip a step that isn't optional.");
-    }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
-  };
+ 
 
   const handleReset = () => {
     setActiveStep(0);
   };
-    const onCheckOut = () => {
-        console.log("triggered")
-        handleClickOpen();
-        if ((items.length !== 0 //&& user
-            )) {
-          document.body.classList.remove('is-basket-open');
-          //history.push(CHECKOUT_STEP_1);
-        } else {
-        //  onOpenModal();
-       
-        }
-      };
+
     // Line item amount
     const sumItem = items.map((item: any) => item.quantity * item.price);
     // Total of all items
@@ -94,11 +71,7 @@ type TypeCart = {
           const labelProps: {
             optional?: React.ReactNode;
           } = {};
-          if (isStepOptional(index)) {
-            labelProps.optional = (
-              <Typography variant="caption">Optional</Typography>
-            );
-          }
+        
           if (isStepSkipped(index)) {
             stepProps.completed = false;
           }
@@ -111,12 +84,28 @@ type TypeCart = {
           );
         })}
       </Stepper>
-      {activeStep===0 && (<><div className={style.cartTotal}>
+      {activeStep===0 && (<>
+        <div>
+          <div className={style.cartList}>        
+        {isItemsAvail && cartItems.map((product:CartListPropsType)=> (
+          <div><CartList price={product.price}  quantity={product.quantity} id={product.id}
+          image={product.image}  title={product.title}/></div>)
+        )}
+        </div>
+        <div className={style.cartTotal}>
                 <p className={style.cartTotalTitle}>Subtotal Amout:</p>
                 <h2 className={style.cartTotalAmount}>
                   {sumTotal}
                 </h2>
               </div>
+    
+    </div>{/* 
+      <div className={style.cartTotal}>
+                <p className={style.cartTotalTitle}>Subtotal Amout:</p>
+                <h2 className={style.cartTotalAmount}>
+                  {sumTotal}
+                </h2>
+              </div> */}
               </>)}
       {activeStep===1 &&(<><h3>Shipping Info Here</h3></>)}
       {activeStep===2 && (<><h3>Payment Info Here</h3></>)}
@@ -143,11 +132,6 @@ type TypeCart = {
               Back
             </Button>
             <Box sx={{ flex: '1 1 auto' }} />
-            {isStepOptional(activeStep) && (
-              <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                Skip
-              </Button>
-            )}
             <Button onClick={handleNext}>
               {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
             </Button>
